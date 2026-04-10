@@ -7,7 +7,7 @@ This project is deployed and hosted on Render, ensuring reliable uptime and perf
 
 
 ## Deployment
-**Live Demo:** [View File_Uploader on Render](https://exclusive-club.onrender.com)
+**Live Demo:** [View File_Uploader on Render](https://file-uploader-ok0w.onrender.com)
 
 Database: Supabase (already configured)
 Hosting: Render
