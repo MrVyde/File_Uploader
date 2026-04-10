@@ -1,0 +1,616 @@
+/* Basic layout for folders index page */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+}
+
+.top-bar h1 {
+  margin: 0;
+}
+
+.top-actions form {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.container {
+  display: flex;
+  height: calc(100vh - 60px); /* subtract top-bar height */
+}
+
+.sidebar {
+  width: 250px;
+  background: #f0f0f0;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.sidebar li {
+  margin: 10px 0;
+}
+
+.new-folder-form input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.folder-section {
+  margin-bottom: 20px;
+}
+
+.file-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.file-list li {
+  margin: 5px 0;
+}
+
+.flash {
+  padding: 10px 20px;
+  margin: 10px 0;
+}
+
+.flash-error {
+  background-color: #ffdddd;
+  color: #a00;
+}
+
+.flash-success {
+  background-color: #ddffdd;
+  color: #0a0;
+}
+
+/* Center the guest view */
+.guest-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(100, 100, 100);
+}
+
+/* Card */
+.guest-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.guest-card h2 {
+  margin-bottom: 10px;
+}
+
+.guest-card p {
+  color: #555;
+  margin-bottom: 25px;
+}
+
+/* Buttons container */
+.auth-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Base button */
+.btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+/* Primary (Sign Up) */
+.btn-primary {
+  background: #4f46e5;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* Secondary (Login) */
+.btn-secondary {
+  background: #e5e7eb;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #d1d5db;
+  transform: translateY(-2px);
+}
+
+/* Form page wrapper */
+.form-wrapper {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(93, 93, 93);
+  padding: 20px;
+}
+
+/* Form card */
+.form-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  width: 380px;
+  max-width: 100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.form-card h2 {
+  margin-bottom: 20px;
+  color: #111827;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.form-group input:focus {
+  border-color: #4f46e5;
+}
+
+/* Form submit button */
+.form-btn {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+/* Footer link */
+.form-footer {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.form-footer a {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* FadeIn animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* logo left, buttons right */
+  align-items: center;
+  padding: 15px 30px;
+  background: #4f46e5; /* same gradient / solid you prefer */
+  color: white;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar .nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Folder list */
+.folder-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Each folder row */
+.folder-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+/* Hover background */
+.folder-item:hover {
+  background: #f3f4f6;
+}
+
+/* Folder name */
+.folder-link {
+  text-decoration: none;
+  color: #111827;
+  font-weight: 500;
+}
+
+/* Actions hidden by default */
+.folder-actions {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Show on hover */
+.folder-item:hover .folder-actions {
+  opacity: 1;
+}
+
+
+/* Slight hover effect */
+.folder-actions a:hover,
+.folder-actions button:hover {
+  transform: scale(1.1);
+}
+
+
+.folder-actions a,
+.folder-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  padding: 2px 4px;
+  transition: color 0.2s ease;
+}
+
+/* Edit */
+.action-edit:hover {
+  color: #4f46e5;
+}
+
+/* Delete */
+.action-delete:hover {
+  color: #dc2626;
+}
+
+/* Modal background */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hide by default */
+.hidden {
+  display: none;
+}
+
+/* Modal box */
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-header button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.folder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.mohdal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mohdal.hidden {
+  display: none;
+}
+
+.modal-cuntent {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.upload-box {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.upload-box:hover {
+  border-color: #007bff;
+  background: #f8f9ff;
+}
+
+.upload-box input {
+  display: none;
+}
+
+/* Layout */
+.top-bar {
+  background: #2f3640;
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar a {
+  color: #00a8ff;
+  text-decoration: none;
+}
+
+/* Container */
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+/* Card */
+.file-details-card {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.file-details-card h2 {
+  margin-bottom: 20px;
+}
+
+.file-details-card p {
+  margin: 10px 0;
+  color: #444;
+}
+
+/* Buttons */
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Button Variants */
+.btn-primary {
+  background: #00a8ff;
+  color: white;
+}
+
+.btn-secondary {
+  background: #718093;
+  color: white;
+}
+
+.btn-danger {
+  background: #e84118;
+  color: white;
+}
+
+/* Hover effects */
+.btn:hover {
+  opacity: 0.85;
+}
+
+/* Flash messages */
+.flash {
+  width: 400px;
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.flash.error {
+  background: #ffcccc;
+  color: #900;
+}
+
+.flash.success {
+  background: #ccffcc;
+  color: #060;
+}
+
+/* Modal (for rename later) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+
+.file-item {
+  position: relative;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.file-link {
+  text-decoration: none;
+  color: #333;
+}
+
+/* Hide actions by default */
+.file-actions {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  gap: 10px;
+}
+
+/* Show on hover */
+.file-item:hover .file-actions {
+  display: flex;
+}
+
+/* Buttons */
+.rename-btn {
+  background: #718093;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #e84118;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+.modal2 {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 999;
+}
+
+.modal2.hidden { display: none; }
+
+.modal2-content {
+  background: #fff; padding: 20px; border-radius: 8px;
+  width: 360px; max-width: 90%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.modal2-header { display: flex; justify-content: space-between; align-items: center; }
+
+.modal2-body { margin-top: 10px; display: flex; flex-direction: column; gap: 10px; }
+
+.share-input-wrapper2 { display: flex; gap: 8px; }
+
+#shareLinkInput { flex: 1; padding: 6px 8px; border-radius: 4px; border: 1px solid #ccc; }

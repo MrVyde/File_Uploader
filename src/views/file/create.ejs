@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File-Uploader | create</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <div id="uploadModal" class="mohdal hidden">
+        <div class="modal-cuntent">
+            <h3>Upload File</h3>
+
+            <form action="/files/upload" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="folderId" value="<%= activeFolder ? activeFolder.id : '' %>">
+
+            <div class="upload-box">
+                <input type="file" id="fileInput" name="file" required>
+                <label for="fileInput">
+                    <p>Click to choose file</p>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+
+            <button onclick="closeUploadModal()">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>

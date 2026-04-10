@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shared Folder</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <h1>File Uploader</h1>
+
+    <div class="top-actions">
+      <span>Shared Folder</span>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+
+    <!-- Sidebar (read-only) -->
+    <aside class="sidebar">
+      <h2>Folder</h2>
+
+      <ul class="folder-list">
+        <li class="folder-item active">
+          <span class="folder-link">
+            <%= folder.name %>
+          </span>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Area -->
+    <main class="main-content">
+
+      <div class="folder-header">
+        <h3><%= folder.name %></h3>
+      </div>
+
+      <section class="folder-section">
+
+        <% if (!folder || folder.files.length === 0) { %>
+          <p>No files in this folder</p>
+        <% } else { %>
+
+          <ul class="file-list">
+            <% folder.files.forEach(file => { %>
+              <li class="file-item">
+
+                <!-- File name -->
+                <span class="file-link">
+                  <%= file.filename %>
+                </span>
+
+                <!-- Actions (read-only) -->
+                <div class="file-actions">
+                    <a href="/share/<%= token %>/file/<%= file.id %>" class="btn btn-secondary">View</a>
+                    <a href="/share/<%= token %>/download/<%= file.id %>" class="btn btn-primary">Download</a>
+                </div>
+
+              </li>
+            <% }) %>
+          </ul>
+
+        <% } %>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

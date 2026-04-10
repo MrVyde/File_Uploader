@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["file_uploader"]
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  files     File[]   @relation("UserFiles")
+  folders   Folder[] @relation("UserFolders")
+
+  @@schema("file_uploader")
+}
+
+model Folder {
+  id        String   @id @default(uuid())
+  name      String
+  ownerId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  files     File[]   @relation("FolderFiles")
+  owner     User     @relation("UserFolders", fields: [ownerId], references: [id])
+  shares    Share[]  @relation("FolderShares")
+
+  @@unique([name, ownerId])
+  @@schema("file_uploader")
+}
+
+model File {
+  id        String   @id @default(uuid())
+  filename  String
+  url       String
+  size      Int
+  folderId  String
+  ownerId   Int
+  createdAt DateTime @default(now())
+  folder    Folder   @relation("FolderFiles", fields: [folderId], references: [id])
+  owner     User     @relation("UserFiles", fields: [ownerId], references: [id])
+
+  @@unique([filename, folderId])
+  @@index([folderId])
+  @@index([ownerId])
+  @@schema("file_uploader")
+}
+
+model Share {
+  id        String   @id @default(uuid())
+  folderId  String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  folder    Folder   @relation("FolderShares", fields: [folderId], references: [id], onDelete: Cascade)
+
+  @@index([folderId])
+  @@index([expiresAt])
+  @@schema("file_uploader")
+}
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([expiresAt])
+  @@schema("file_uploader")
+}

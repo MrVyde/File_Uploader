@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File-Uploader | Sign Up</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <h1 class="logo">File-Uploader</h1>
+    <div class="nav-buttons">
+      <a href="/" class="btn btn-secondary">Home</a>
+      <a href="/api/users/login" class="btn btn-primary">Sign In</a>
+    </div>
+  </header>
+
+  <!-- Sign Up Form -->
+  <main class="form-wrapper">
+    <div class="form-card">
+      <h2>Create an Account</h2>
+      <%- include("../partials/errors") %>
+
+      <form action="/api/users/submit" method="POST">
+
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="First Name" value="<%= old?.firstName || '' %>" required>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Last Name" value="<%= old?.lastName || '' %>" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email" value="<%= old?.email || '' %>" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary form-btn">Sign Up</button>
+
+      </form>
+
+      <p class="form-footer">
+        Already have an account? <a href="/api/users/login">Sign In</a>
+      </p>
+
+    </div>
+  </main>
+
+</body>
+</html>

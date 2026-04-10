@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File Details</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <h1>File Details</h1>
+
+    <div>
+      <a href="/?folderId=<%= file.folderId %>">← Back to Folder</a>
+    </div>
+  </header>
+<%- include("../partials/errors") %>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <div class="file-details-card">
+      <h2><%= file.filename %></h2>
+
+      <p><strong>Size:</strong> <%= file.size %> bytes</p>
+
+      <p><strong>Uploaded:</strong> 
+        <%= new Date(file.createdAt).toDateString() %>
+      </p>
+
+      <div class="actions">
+
+        <!-- Download -->
+        <a href="/files/<%= file.id %>/download" class="btn btn-primary">Download</a>
+
+        <!-- Rename -->
+         <button 
+            class="btn btn-secondary"
+            onclick="openFileRenameModal('<%= file.id %>', '<%= file.filename %>')">
+            Rename
+        </button>
+
+        <!-- Delete -->
+        <form action="/files/<%= file.id %>?_method=DELETE" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger">
+            Delete
+          </button>
+        </form>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Rename Modal (optional for later)
+  <div id="renameModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Rename File</h3>
+
+      <form action="/files/<%= file.id %>/rename" method="POST">
+        <input type="text" name="filename" value="<%= file.filename %>" required>
+        <button type="submit">Save</button>
+      </form>
+
+      <button onclick="closeRenameModal()">Cancel</button>
+    </div>
+  </div> -->
+
+  <%- include("./edit") %>
+
+  
+
+</body>
+</html>

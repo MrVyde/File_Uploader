@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File-Uploader | Rename File</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <div id="shareModal" class="modal2 hidden">
+      <div class="modal2-content">
+        <div class="modal2-header">
+          <h3>Share Folder</h3>
+          <button id="closeShareModal">&times;</button>
+        </div>
+        <div class="modal2-body">
+          <label for="expirySelect">Link expires in:</label>
+          <select id="expirySelect">
+            <option value="1">1 day</option>
+            <option value="7">7 days</option>
+            <option value="30">30 days</option>
+          </select>
+
+          <button type="button" id="generateShareLink" class="btn btn-primary">
+            Generate Link
+          </button>
+          <p>Copy the link below to share this folder:</p>
+          <div class="share-input-wrapper2">
+            <input type="text" id="shareLinkInput" readonly>
+            <button id="copyShareLink" class="btn btn-secondary">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("shareModal");
+  const input = document.getElementById("shareLinkInput");
+  const expirySelect = document.getElementById("expirySelect");
+  const closeBtn = document.getElementById("closeShareModal");
+  const copyBtn = document.getElementById("copyShareLink");
+  const generateBtn = document.getElementById("generateShareLink");
+
+  let currentFolderId = null;
+
+  // Open modal
+  window.openShareModal = function(folderId) {
+    currentFolderId = folderId;
+    input.value = ""; // clear previous link
+    modal.classList.remove("hidden");
+  };
+
+  // Close modal
+  closeBtn.addEventListener("click", () => modal.classList.add("hidden"));
+
+  // Copy link
+  copyBtn.addEventListener("click", () => {
+    if (!input.value) return;
+    input.select();
+    input.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    alert("Link copied to clipboard!");
+  });
+
+  // Generate link
+  generateBtn.addEventListener("click", async () => {
+    if (!currentFolderId) return;
+
+    const duration = expirySelect.value;
+
+    try {
+      const res = await fetch("/share/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ folderId: currentFolderId, duration })
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        alert(err.message || "Failed to create share link");
+        return;
+      }
+
+      const data = await res.json();
+      const token = data.token;
+
+      input.value = `${window.location.origin}/share/${token}`;
+    } catch (err) {
+      console.error(err);
+      alert("Error generating link");
+    }
+  });
+
+  // Close when clicking outside
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.classList.add("hidden");
+  });
+});
+</script>
+</body>
+</html>

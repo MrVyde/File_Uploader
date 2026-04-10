@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File-Uploader | Rename</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <div id="renameModal" class="modal hidden">
+        <div class="modal-content">
+
+            <div class="modal-header">
+            <h3>Rename Folder</h3>
+            <button id="closeModal">&times;</button>
+            </div>
+
+            <form id="renameForm" method="POST">
+            <input type="text" name="name" id="folderNameInput" value="<%= oldInput?.name || '' %>" required>
+            <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>
